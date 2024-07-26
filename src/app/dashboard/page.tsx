@@ -242,125 +242,74 @@ const Dashboard = () => {
             <select
               value={selectedRange}
               onChange={handleRangeChange}
-              className="p-2 border border-border rounded mb-4"
+              className="p-2 mb-4 border border-border rounded-lg"
             >
               <option value="daily">Daily</option>
               <option value="weekly">Weekly</option>
               <option value="monthly">Monthly</option>
               <option value="yearly">Yearly</option>
             </select>
-            <Chart
-              width={"100%"}
-              height={350}
-              options={salesData.options}
-              series={salesData.series}
-              type="line"
-            />
-          </div>
-          <div className="w-full md:w-1/2">
-            <div className="bg-white p-4 border border-border rounded-lg shadow-lg">
-              <h2 className="text-xl font-bold mb-4">Sales Data Details</h2>
-              {salesData.series[0]?.data.length > 0 && (
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr>
-                      <th className="border p-2">Period</th>
-                      <th className="border p-2">Sales</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {salesData.series[0].data.map((value, index) => (
-                      <tr key={index}>
-                        <td className="border p-2">{salesData?.options?.xaxis?.categories[index]}</td>
-                        <td className="border p-2">{value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
+            <div className="bg-card-bg border border-border rounded-lg p-4 shadow-lg">
+              <Chart
+                options={salesData.options}
+                series={salesData.series}
+                type="line"
+                height={300}
+              />
             </div>
           </div>
-        </div>
-
-        {/* Purchase Section in One Row */}
-        <div className="flex flex-col md:flex-row md:space-x-4 mb-8">
           <div className="w-full md:w-1/2">
             <h2 className="text-2xl font-bold mb-4">Purchase Data</h2>
-            <select
-              value={selectedRange}
-              onChange={handleRangeChange}
-              className="p-2 border border-border rounded mb-4"
-            >
-              <option value="daily">Daily</option>
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-            <Chart
-              width={"100%"}
-              height={350}
-              options={purchaseData.options}
-              series={purchaseData.series}
-              type="bar"
-            />
-          </div>
-          <div className="w-full md:w-1/2">
-            <div className="bg-white p-4 border border-border rounded-lg shadow-lg">
-              <h2 className="text-xl font-bold mb-4">Purchase Data Details</h2>
-              {purchaseData.series[0]?.data.length > 0 && (
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr>
-                      <th className="border p-2">Period</th>
-                      <th className="border p-2">Purchases</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {purchaseData.series[0].data.map((value, index) => (
-                      <tr key={index}>
-                        <td className="border p-2">{purchaseData?.options?.xaxis?.categories[index]}</td>
-                        <td className="border p-2">{value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              )}
+            <div className="bg-card-bg border border-border rounded-lg p-4 shadow-lg">
+              <Chart
+                options={purchaseData.options}
+                series={purchaseData.series}
+                type="bar"
+                height={300}
+              />
             </div>
           </div>
         </div>
 
-        <div className="mt-8 w-full">
+        {/* Attendance Section */}
+        <div className="mb-8">
           <h2 className="text-2xl font-bold mb-4">Attendance Data</h2>
-          <div className="flex justify-between mb-4">
-            <select
-              value={attendanceRange}
-              onChange={handleAttendanceRangeChange}
-              className="p-2 border border-border rounded"
-            >
-              <option value="daily">Daily</option>
-              <option value="weekly">Weekly</option>
-              <option value="monthly">Monthly</option>
-              <option value="yearly">Yearly</option>
-            </select>
-          </div>
-          <table className="w-full text-left border-collapse">
-            <thead>
-              <tr>
-                <th className="border p-2">Employee Name</th>
-                <th className="border p-2">Days Present</th>
-                <th className="border p-2">Total Days</th>
-              </tr>
-            </thead>
-            <tbody>
-              {currentAttendanceData.map((employee, index) => (
-                <tr key={index}>
-                  <td className="border p-2">{employee.name}</td>
-                  <td className="border p-2">{employee.daysPresent}</td>
-                  <td className="border p-2">{employee.totalDays}</td>
+          <select
+            value={attendanceRange}
+            onChange={handleAttendanceRangeChange}
+            className="p-2 mb-4 border border-border rounded-lg"
+          >
+            <option value="daily">Daily</option>
+            <option value="weekly">Weekly</option>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Yearly</option>
+          </select>
+          <div className="bg-card-bg border border-border rounded-lg p-4 shadow-lg">
+            <table className="min-w-full divide-y divide-border">
+              <thead>
+                <tr>
+                  <th className="px-6 py-3 bg-card-bg text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Name
+                  </th>
+                  <th className="px-6 py-3 bg-card-bg text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Days Present
+                  </th>
+                  <th className="px-6 py-3 bg-card-bg text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Total Days
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="bg-card-bg divide-y divide-border">
+                {currentAttendanceData.map((record) => (
+                  <tr key={record.name}>
+                    <td className="px-6 py-4 whitespace-nowrap">{record.name}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{record.daysPresent}</td>
+                    <td className="px-6 py-4 whitespace-nowrap">{record.totalDays}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
