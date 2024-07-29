@@ -215,7 +215,13 @@ const Dashboard = () => {
 
   return (
     <div className="flex flex-col items-center h-screen bg-bg p-4">
-      <h1 className="text-3xl font-bold mb-8">Your Restaurants</h1>
+      <h1 className="text-3xl font-bold mb-8">Welcome to Admin Dashboard</h1>
+      <button
+        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-8"
+        onClick={() => router.push('/create-restaurant')}
+      >
+        Create Restaurant
+      </button>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {restaurantData.map((restaurant) => (
           <div
