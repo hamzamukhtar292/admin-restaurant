@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useCallback, useState, FC } from "react";
-import { useDropzone, FileRejection, DropEvent } from "react-dropzone";
+import React, { useState, FC } from "react";
+import { useDropzone } from "react-dropzone";
 import { useRouter } from "next/navigation";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -20,11 +20,9 @@ const CreateRestaurantSchema = Yup.object().shape({
   images: Yup.mixed()
     .required("A file is required")
     .test("fileFormat", "Unsupported Format, only PNG is allowed", (value) => {
-      // Check if value is null or undefined, and handle it appropriately
       if (!value) {
-        return false; // Return false if no file is provided
+        return false;
       }
-      // Check if the value is a File object
       if (value instanceof File) {
         return value.type === "image/png";
       }
@@ -33,45 +31,33 @@ const CreateRestaurantSchema = Yup.object().shape({
 });
 
 const CreateRestaurant: FC = () => {
-  const [files, setFiles] = React.useState<any[]>([]);
-  const [previewImages, setPreviewImages] = useState([]);
+  const [images, setImages] = React.useState<any[]>([]);
   const router = useRouter();
 
-  const onDrop = useCallback(
-    (
-      acceptedFiles: File[],
-      fileRejections: FileRejection[],
-      event: DropEvent
-    ) => {
-      const validFiles = acceptedFiles.filter(
-        (file) => file.type === "image/png"
-      );
+  const onDrop = (acceptedFiles: File[]) => {
+    console.log(acceptedFiles);
+    const newImages = acceptedFiles.map((file) => ({
+      preview: URL.createObjectURL(file),
+      file,
+    }));
+    setImages((prevImages) => [...prevImages, ...newImages]);
+  };
 
-      if (
-        fileRejections.length > 0 ||
-        validFiles.length !== acceptedFiles.length
-      ) {
-        setFiles([]);
-      } else {
-        const filePreviews = validFiles.map((file) => ({
-          file,
-          preview: URL.createObjectURL(file),
-        }));
-        setFiles(filePreviews);
-      }
-    },
-    []
-  );
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      "image/png": [".png"],
-    },
-  });
+  const handleImageDelete = (index: Number) => {
+    setImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
+
+  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
+    useDropzone({
+      onDrop,
+      accept: {
+        "image/*": [],
+      },
+    });
 
   const handlecreate = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log();
+    // alert(images);
     // Dummy authentication logic
   };
 
@@ -87,7 +73,7 @@ const CreateRestaurant: FC = () => {
       validationSchema={CreateRestaurantSchema}
       onSubmit={(values) => {
         // Handle form submission
-        console.log(values);
+        //alert(location);
       }}
     >
       {({ values, setFieldValue, errors, touched }) => (
@@ -158,44 +144,45 @@ const CreateRestaurant: FC = () => {
               />
             </div>
 
-            <div
-              {...getRootProps({
-                className:
-                  "dropzone border-2 border-dashed border-gray-400 rounded p-5 cursor-pointer",
-              })}
-            >
-              <input
-                {...getInputProps()}
-                onChange={(event) => {
-                  const files = event.currentTarget.files;
-                  setFieldValue("images", files ? files[0] : null);
-                }}
-              />
-              {isDragActive ? (
-                <p>Drop the files here ...</p>
-              ) : (
-                <p>Drag and drop some files here, or click to select files </p>
-              )}
-              <div>
-                {files.map(({ file, preview }) => (
-                  <div key={file.name} className="my-2">
+            <div>
+              <div
+                {...getRootProps()}
+                className="border-2 border-dashed border-gray-300 p-5 text-center cursor-pointer"
+              >
+                <input {...getInputProps()} />
+
+                {isDragActive ? (
+                  <p>Drop the files here ...</p>
+                ) : (
+                  <p>Drag and drop some files here, or click to select files</p>
+                )}
+              </div>
+              <div className="flex flex-wrap mt-5">
+                {images.map((image, index) => (
+                  <div key={index} className="m-2 relative">
                     <Image
-                      src={preview}
-                      alt={file.name}
-                      width={100}
-                      height={100}
-                      className="w-24 h-24 object-cover"
+                      src={image.preview}
+                      alt={`img-${index}`}
+                      width="100"
+                      height="100"
+                      className="w-[137px] h-[137px] object-cover border-2 border-red-600"
                     />
-                    <p>{file.name}</p>
+                    <button
+                      onClick={() => handleImageDelete(index)}
+                      className="absolute top-2 right-2 bg-black bg-opacity-50 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs cursor-pointer"
+                    >
+                      ✖
+                    </button>
                   </div>
                 ))}
               </div>
             </div>
+
             <button
               type="submit"
-              className="w-full p-3 bg-button text-white rounded hover:bg-red-700 transition"
+              className="w-full p-3 mt-3 bg-button text-white rounded hover:bg-red-700 transition"
             >
-              Create{" "}
+              Create
             </button>
           </form>
         </div>
