@@ -1,7 +1,5 @@
 'use client';
 
-import React from 'react';
-
 const AttendanceTab = () => {
   // Dummy attendance data
   const attendanceRecords = [
