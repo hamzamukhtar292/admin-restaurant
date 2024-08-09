@@ -12,22 +12,22 @@ const EmployeeTab = () => {
   ];
 
   return (
-    <div className="w-full overflow-hidden rounded-lg shadow-lg bg-card-bg">
-      <h2 className="text-2xl mb-4 p-4 border-b border-border">Employees {employees.length}</h2>
-      <table className="min-w-full divide-y divide-border">
+    <div className="w-full overflow-hidden rounded-lg shadow-lg bg-base2">
+      <h2 className="text-2xl mb-4 p-4 border-b border-borderBase">Employees {employees.length}</h2>
+      <table className="min-w-full divide-y divide-border bg-base2">
         <thead>
-          <tr className="bg-gray-100">
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-            <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Role</th>
+          <tr className="bg-grey2">
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray6 uppercase tracking-wider">ID</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray6 uppercase tracking-wider">Name</th>
+            <th className="px-6 py-3 text-left text-xs font-medium text-gray6 uppercase tracking-wider">Role</th>
           </tr>
         </thead>
-        <tbody className="bg-white divide-y divide-border">
+        <tbody className="bg-base2 divide-y text-textMain divide-borderBase">
           {employees.map((employee) => (
             <tr key={employee.id}>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{employee.id}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{employee.name}</td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{employee.role}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm  text-textMain">{employee.id}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm  text-textMain">{employee.name}</td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm  text-textMain">{employee.role}</td>
             </tr>
           ))}
         </tbody>

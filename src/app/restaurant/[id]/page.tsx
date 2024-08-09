@@ -29,7 +29,7 @@ const RestaurantDetail = ({ params }: any) => {
   }
 
   return (
-    <div className="flex flex-col items-center p-4 bg-bg">
+    <div className="flex flex-col items-center p-4 bg-base">
       <h1 className="text-3xl font-bold mb-2">{restaurant.name}</h1>
       <p className="text-gray-700 mb-4">{restaurant.description}</p>
 

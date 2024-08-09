@@ -4,72 +4,73 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-:root {
-  /* Light mode colors */
-  --color-bg: 255, 255, 255;          /* White background */
-  --color-card-bg: 255, 243, 224;     /* Soft peach card background */
-  --color-text: 40, 40, 40;            /* Dark gray for text */
-  --color-border: 220, 220, 220;       /* Light gray for borders */
-  --color-placeholder: 160, 160, 160;  /* Gray for placeholders */
-
-  /* Accent colors */
-  --color-accent: 252, 107, 29;        /* Bright orange for accents */
-  --color-button: 255, 83, 0;          /* Deep orange for buttons */
-
-  /* Custom gray and red colors */
-  --color-gray-100: 245, 245, 245;     /* Light gray */
-  --color-gray-500: 128, 128, 128;     /* Medium gray */
-  --color-gray-700: 97, 97, 97;        /* Dark gray */
-
-  --color-red-100: 255, 204, 204;      /* Light red */
-  --color-red-500: 239, 68, 68;        /* Medium red */
-  --color-red-700: 153, 27, 27;        /* Dark red */
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark mode colors */
-    --color-bg: 30, 30, 30;             /* Dark gray background */
-    --color-card-bg: 40, 40, 40;        /* Darker card background */
-    --color-text: 255, 255, 255;        /* White for dark mode text */
-    --color-border: 60, 60, 60;         /* Darker gray for borders */
-    --color-placeholder: 120, 120, 120; /* Light gray for placeholders */
-
-    /* Accent colors */
-    --color-accent: 255, 140, 0;        /* Adjusted bright orange for dark mode */
-    --color-button: 255, 120, 0;        /* Adjusted deep orange for dark mode */
-
-    /* Custom gray and red colors for dark mode */
-    --color-gray-100: 50, 50, 50;       /* Darker light gray */
-    --color-gray-500: 169, 169, 169;    /* Light gray */
-    --color-gray-700: 200, 200, 200;     /* Lighter dark gray */
-
-    --color-red-100: 255, 77, 77;       /* Darker light red */
-    --color-red-500: 248, 113, 113;     /* Adjusted medium red */
-    --color-red-700: 220, 38, 38;       /* Adjusted dark red */
+    --color-base: #1d1d1d;
+    --color-base2: #282828;
+    --color-base3: #424346;
+    --color-base4: #282828;
+    --color-main1: #10838b;
+    --color-main2: #54bac1;
+    --color-main3: #1d8c93;
+    --color-main4: rgba(95, 216, 224, 0.3);
+    --color-main5: #ffffff;
+    --color-main6: #1d1d1d;
+    --color-grey1: #424346;
+    --color-grey2: #6e6f74;
+    --color-grey3: #898a8f;
+    --color-grey4: #b3b4b8;
+    --color-grey5: #e5e5e6;
+    --color-grey6: #898a8f;
+    --color-grey7: #b3b4b8;
+    --color-input-main: #424346;
+    --color-primary2: #46cdcf;
+    --color-secondary1: #24d2fd;
+    --color-border-base: #424346;
+    --color-border-base2: #424346;
+    --color-border-base3: rgba(255, 255, 255, 0.2);
+    --color-text-base: #ffffff;
+    --color-text-base2: #898a8f;
+    --color-footer-base: #53565f;
+    --color-textMain: #ffffff;
+  }
+}
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-base: #ffffff;
+    --color-base2: #f7f7f7;
+    --color-base3: #edeef3;
+    --color-base4: #ffffff;
+    --color-main1: #10838b;
+    --color-main2: #0a676d;
+    --color-main3: #034e53;
+    --color-main4: rgba(16, 131, 139, 0.3);
+    --color-main5: #1d1d1d;
+    --color-main6: #f8f8fa;
+    --color-secondary1: #0098bd;
+    --color-grey1: #424346;
+    --color-grey2: #6e6f74;
+    --color-grey3: #898a8f;
+    --color-grey4: #b3b4b8;
+    --color-grey5: #e5e5e6;
+    --color-grey6: #7e8598;
+    --color-grey7: #b4bacc;
+    --color-input-main: #e5e5e6;
+    --color-primary2: #407e95;
+    --color-border-base: #d0d7dc;
+    --color-border-base2: #1d1d1d;
+    --color-border-base3: rgba(29, 29, 29, 0.4);
+    --color-text-base: #1d1d1d;
+    --color-text-base2: #606679;
+    --color-textMain: #1d1d1d;
+    --color-footer-base: linear-gradient(to right, #666161 100%, #424242 100%);
   }
 }
 
 body {
   font-family: 'Poppins', sans-serif;
-  color: rgb(var(--color-text));
-  background: rgb(var(--color-bg));
 }
 
-h2 {
-  font-family: 'Lobster', cursive; /* Apply Lobster to headings */
-  color: rgb(var(--heading-color)); /* Apply heading color */
-}
-
-/* Card styles */
-.card {
-  background: rgb(var(--color-card-bg));
-  border: 1px solid rgb(var(--color-border));
-  border-radius: 8px;
-  padding: 1rem;
-}
-
-/* Placeholder styles */
 ::placeholder {
   color: rgb(var(--color-placeholder));
 }

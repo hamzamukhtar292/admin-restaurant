@@ -40,13 +40,13 @@ const Dashboard = () => {
   
 
   return (
-    <div className="flex flex-col items-center h-screen bg-bg p-4">
-      <h1 className="text-3xl font-bold mb-8">Welcome to Admin Dashboard</h1>
+    <div className="flex flex-col items-center h-screen bg-base p-4">
+      <h1 className="text-3xl font-bold mb-8 text-textMain">Welcome to Admin Dashboard</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {restaurantData.map((restaurant) => (
           <div
             key={restaurant.id}
-            className="cursor-pointer p-4 bg-card-bg border border-border rounded-lg shadow-lg transition-transform transform hover:scale-105"
+            className="cursor-pointer p-4 bg-basae2 border border-borderBase rounded-lg shadow-lg transition-transform transform hover:scale-105"
             onClick={() => handleCardClick(restaurant.id)}
           >
             <img
@@ -54,8 +54,8 @@ const Dashboard = () => {
               alt={restaurant.name}
               className="w-full h-32 object-cover rounded-lg mb-4"
             />
-            <h2 className="text-xl font-semibold text-text">{restaurant.name}</h2>
-            <p className="text-gray-600">{restaurant.description}</p>
+            <h2 className="text-xl  font-semibold text-textMain">{restaurant.name}</h2>
+            <p className="text-grey6">{restaurant.description}</p>
           </div>
         ))}
       </div>
