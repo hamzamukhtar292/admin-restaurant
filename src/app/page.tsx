@@ -1,54 +1,26 @@
-"use client";
-
+"use client"
 import React, { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-
-// Define the type for login variables
-interface LoginVariables {
-  username: string;
-  password: string;
-}
-
-// Define the type for the login response
-interface LoginResponse {
-  token: string;
-}
-
-// Define the API URL
-const API_URL = 'http://localhost:8080/auth/login';
+import { loginMutation } from './api/mutations/auth';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  // Use the mutation hook
-  const { mutate, status, error } = useMutation<LoginResponse, Error, LoginVariables>({
-    mutationFn: async (variables: LoginVariables) => {
-      const response = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(variables),
-      });
-
-      if (!response.ok) {
-        throw new Error('Login failed');
-      }
-
-      return response.json();
-    },
-    onSuccess: (data) => {
+  const { mutate, status, error } = useMutation({
+    mutationFn:loginMutation,
+    onSuccess: (data:any) => {
       localStorage.setItem('token', data.token);
       alert('Login successful');
     },
-    onError: (error) => {
+    onError: (error:any) => {
       console.error('Login error:', error.message);
     },
-  });
-
-  // Handle form submission
+  })
+   
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    mutate({ username, password });
+    mutate({ email, password });
   };
 
   return (
@@ -65,8 +37,8 @@ const LoginPage = () => {
             <input
               id="username"
               type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               placeholder="Username"
               required
               className="w-full p-3 rounded-md border-none placeholder-textMain bg-inputMain"
