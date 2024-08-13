@@ -1,13 +1,12 @@
-// // app/api/queries/useSomeQuery.ts
+import { createGlobalState } from "../state";
 
-// import { useQuery } from '@tanstack/react-query';
-// import axios from 'axios';
+type UserState = {
+    name:string;
+    isSignedIn: boolean;
+};
 
-// const fetchSomeData = async () => {
-//   const response = await axios.get('/api/some-endpoint');
-//   return response.data;
-// };
-
-// export const useSomeQuery = () => {
-//   return useQuery('sd', fetchSomeData);
-// };
+export const useUserState = 
+createGlobalState<UserState>('user', {
+    name: "hamza",
+    isSignedIn:true,
+})
